@@ -62,4 +62,5 @@ cc_library(
         "-DHAVE_CONFIG_H",
     ],
     strip_include_prefix = "libarchive",
+    visibility = ["//visibility:public"],
 )

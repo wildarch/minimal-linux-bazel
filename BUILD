@@ -4,7 +4,7 @@ genrule(
         "@busybox//file",
         ":init",
     ],
-    outs = ["rootfs.cpio"],
+    outs = ["rootfs.gz"],
     cmd = "mkdir rootfs/ && \
 	(echo $(SRCS) | xargs cp -t rootfs/) && \
 	chmod +x rootfs/init && \
@@ -19,14 +19,14 @@ genrule(
 	mkdir rootfs/usr/sbin && \
 	mv rootfs/busybox rootfs/bin/ && \
 	for util in $$(cat $(location :busybox_utils)); do ln -s /bin/busybox rootfs/$$util; done && \
-	cd rootfs/ && (find . | ../$(location @libarchive//:cpio) -R root:root -H newc -o > ../$@)",
+	cd rootfs/ && (find . | ../$(location @libarchive//:cpio) -R root:root -H newc -o -z > ../$@)",
     tools = [
         ":busybox_utils",
         "@libarchive//:cpio",
     ],
 )
 
-# depends on 'xorriso' begin available
+# depends on 'xorriso' being available
 genrule(
     name = "iso",
     srcs = [

@@ -26,3 +26,11 @@ http_archive(
     strip_prefix = "syslinux-6.03",
     url = "http://kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.xz",
 )
+
+http_archive(
+    name = "libarchive",
+    build_file = "BUILD.libarchive",
+    sha256 = "ff138120fe7fca1bd02bed6f06d6869c7497658904a2f8916947f9a3f3257377",
+    strip_prefix = "libarchive-3.3.1",
+    url = "https://github.com/libarchive/libarchive/archive/v3.3.1.tar.gz",
+)

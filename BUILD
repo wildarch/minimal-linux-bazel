@@ -1,11 +1,10 @@
-# Not portable!
 genrule(
     name = "rootfs",
     srcs = [
         "@busybox//file",
         ":init",
     ],
-    outs = ["rootfs.gz"],
+    outs = ["rootfs.cpio"],
     cmd = "mkdir rootfs/ && \
 	(echo $(SRCS) | xargs cp -t rootfs/) && \
 	chmod +x rootfs/init && \
@@ -20,13 +19,14 @@ genrule(
 	mkdir rootfs/usr/sbin && \
 	mv rootfs/busybox rootfs/bin/ && \
 	for util in $$(cat $(location :busybox_utils)); do ln -s /bin/busybox rootfs/$$util; done && \
-	cd rootfs/ && (find . | ../$(location @libarchive//:cpio) -R root:root -H newc -o | gzip > ../$@)",
+	cd rootfs/ && (find . | ../$(location @libarchive//:cpio) -R root:root -H newc -o > ../$@)",
     tools = [
         ":busybox_utils",
         "@libarchive//:cpio",
     ],
 )
 
+# depends on 'xorriso' begin available
 genrule(
     name = "iso",
     srcs = [

@@ -3,4 +3,9 @@ dmesg -n 1
 mount -t devtmpfs none /dev
 mount -t proc none /proc
 mount -t sysfs none /sys
+
+# FIXME this is very hacky
+insmod /e1000.ko.xz
+
 setsid cttyhack /bin/sh
+

@@ -3,6 +3,7 @@ genrule(
     srcs = [
         "@busybox//file",
         ":init",
+        "@e1000//:kernel_module",
     ],
     outs = ["rootfs.gz"],
     cmd = "mkdir rootfs/ && \

@@ -7,8 +7,16 @@ http_archive(
     build_file = "BUILD.linux",
     sha256 = "f0dada7d67f9e402d77852bca9a002aad0e7e1837279db92d897d8d4680b258d",
     strip_prefix = "boot/",
-    url = "http://mirror.i3d.net/pub/archlinux/core/os/x86_64/linux-4.20.11.arch1-1-x86_64.pkg.tar.xz",
+    url = "https://archive.archlinux.org/packages/l/linux/linux-4.20.11.arch1-1-x86_64.pkg.tar.xz",
     # TODO mirrors
+)
+
+http_archive(
+    name = "e1000",
+    build_file = "BUILD.e1000",
+    sha256 = "f0dada7d67f9e402d77852bca9a002aad0e7e1837279db92d897d8d4680b258d",
+    strip_prefix = "usr/lib/modules/4.20.11-arch1-1-ARCH/kernel/drivers/net/ethernet/intel/e1000/",
+    url = "https://archive.archlinux.org/packages/l/linux/linux-4.20.11.arch1-1-x86_64.pkg.tar.xz",
 )
 
 http_file(

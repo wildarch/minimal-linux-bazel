@@ -26,7 +26,6 @@ genrule(
     ],
 )
 
-# depends on 'xorriso' being available
 genrule(
     name = "iso",
     srcs = [
@@ -42,12 +41,12 @@ genrule(
 			$(locations @syslinux//:isolinux) \
 			$(location @linux//:kernel) \
 			$(location :rootfs) && \
-		    xorriso -as mkisofs \
+		    $(location //mkiso) \
 			-o $@ \
 			-b isolinux.bin \
 			-c boot.cat \
-			-no-emul-boot \
-			-boot-load-size 4 \
-			-boot-info-table \
 			root/",
+    tools = [
+        "//mkiso",
+    ],
 )

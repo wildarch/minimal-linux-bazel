@@ -100,3 +100,17 @@ http_archive(
     strip_prefix = "byteorder-1.3.1",
     url = "https://github.com/BurntSushi/byteorder/archive/1.3.1.tar.gz",
 )
+
+# Rules python
+http_archive(
+    name = "io_bazel_rules_python",
+    url = "https://github.com/bazelbuild/rules_python/archive/88532b624f74ab17138fb638d3c62750b5af5f9a.zip",
+)
+
+http_archive(
+    name = "pycdlib",
+    build_file = "BUILD.pycdlib",
+    sha256 = "8a1669c8e932412b4572f5331d31f8ec2e70b63478eee50bae6448ec096acf6b",
+    strip_prefix = "pycdlib-1.7.0/pycdlib/",
+    url = "https://github.com/clalancette/pycdlib/archive/v1.7.0.tar.gz",
+)

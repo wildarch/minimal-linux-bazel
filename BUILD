@@ -4,6 +4,7 @@ genrule(
         "@busybox//file",
         ":init",
         "@e1000//:kernel_module",
+        "//rust_hello",
     ],
     outs = ["rootfs.gz"],
     cmd = "mkdir rootfs/ && \
@@ -13,6 +14,7 @@ genrule(
 	mkdir rootfs/dev && \
 	mkdir rootfs/proc && \
 	mkdir rootfs/sys && \
+	mkdir rootfs/etc && \
 	mkdir rootfs/bin && \
 	mkdir rootfs/sbin && \
 	mkdir rootfs/usr && \

@@ -4,4 +4,5 @@ qemu-system-x86_64 \
     -cdrom bazel-genfiles/dist.iso \
     -boot d \
     -nographic \
-    -netdev user,id=n1 -device e1000,netdev=n1
+    -netdev user,id=n1 \
+    -device e1000,netdev=n1

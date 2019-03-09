@@ -3,13 +3,36 @@ genrule(
     srcs = glob(["src/**/*.rs"]) + [
         "Cargo.toml",
         "Cargo.lock",
+        ":deps",
     ],
     outs = ["rust_hello"],
-    cmd = "cargo build \
+    cmd = "tar xf $(location :deps) && \
+		cargo build \
 		    --manifest-path $(location Cargo.toml) \
 		    --release \
 		    --target x86_64-unknown-linux-musl \
-		    --target-dir . \
-		&& cp x86_64-unknown-linux-musl/release/rust_hello $@",
+		    --target-dir target/ \
+		&& cp target/x86_64-unknown-linux-musl/release/rust_hello $@",
+    executable = True,
+    local = True,
+    output_to_bindir = True,
     visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "deps",
+    srcs = [
+        "Cargo.toml",
+        "Cargo.lock",
+    ],
+    outs = ["target.tar"],
+    cmd = "cp $(location Cargo.toml) . && \
+		cp $(location Cargo.lock) . && \
+		mkdir src/ target/ && \
+		echo \"fn main() {}\" > src/main.rs && \
+		cargo build \
+		    --release \
+		    --target x86_64-unknown-linux-musl \
+		    --target-dir target/ && \
+		tar cf $@ target/",
 )

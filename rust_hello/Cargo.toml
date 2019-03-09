@@ -5,3 +5,4 @@ authors = ["Daan de Graaf <daan.de.graaf@prodrive-technologies.com>"]
 edition = "2018"
 
 [dependencies]
+hyper = "0.12"

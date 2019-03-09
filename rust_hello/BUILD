@@ -28,9 +28,10 @@ genrule(
     outs = ["target.tar"],
     cmd = "cp $(location Cargo.toml) . && \
 		cp $(location Cargo.lock) . && \
-		mkdir src/ target/ && \
-		echo \"fn main() {}\" > src/main.rs && \
+		mkdir -p src/bin target/ && \
+		echo \"fn main() {}\" > src/bin/bogus.rs && \
 		cargo build \
+		    --bin bogus \
 		    --release \
 		    --target x86_64-unknown-linux-musl \
 		    --target-dir target/ && \

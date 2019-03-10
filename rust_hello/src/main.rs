@@ -1,8 +1,12 @@
 extern crate hyper;
+extern crate libc;
+#[macro_use]
+extern crate nix;
 
 use hyper::rt::{self, Future};
 use hyper::service::service_fn_ok;
 use hyper::{Body, Request, Response, Server};
+use nix::sys::socket::{self, AddressFamily, SockFlag, SockType};
 use std::process::Command;
 
 fn main() {
@@ -26,15 +30,38 @@ fn main() {
     rt::run(server);
 }
 
+use libc::{c_char, c_short, IFF_UP, IFNAMSIZ, SIOCSIFFLAGS};
+
+#[repr(C)]
+pub struct FlagsRequest {
+    interface_name: [c_char; IFNAMSIZ],
+    flags: c_short,
+}
+
+ioctl_write_ptr_bad!(set_interface_flags, SIOCSIFFLAGS, FlagsRequest);
+
 // TODO use `ioctl`s for this
 fn setup_network() {
-    Command::new("/sbin/ip")
-        .arg("link")
-        .arg("set")
-        .arg("eth0")
-        .arg("up")
-        .status()
-        .expect("Failed to bring interface up");
+    let sock = socket::socket(
+        AddressFamily::Inet,
+        SockType::Datagram,
+        SockFlag::empty(),
+        None,
+    )
+    .unwrap();
+
+    let mut interface_name = [0; IFNAMSIZ];
+    interface_name[0] = 'e' as c_char;
+    interface_name[1] = 't' as c_char;
+    interface_name[2] = 'h' as c_char;
+    interface_name[3] = '0' as c_char;
+
+    let req = FlagsRequest {
+        interface_name,
+        flags: IFF_UP as i16,
+    };
+    unsafe { set_interface_flags(sock, &req as *const FlagsRequest).expect("Failed to set flags") };
+    unsafe { libc::close(sock) };
 
     Command::new("/sbin/ip")
         .arg("addr")

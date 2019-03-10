@@ -6,3 +6,5 @@ edition = "2018"
 
 [dependencies]
 hyper = "0.12"
+nix = "0.13"
+libc = "0.2"

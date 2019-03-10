@@ -10,17 +10,16 @@ mount -t sysfs none /sys
 insmod /e1000.ko.xz
 
 # Setup networking
-ip link set eth0 up
-ip addr add 10.0.2.15 dev eth0
-ip route add 10.0.2.0/24 dev eth0
+#ip link set eth0 up
+#ip addr add 10.0.2.15 dev eth0
+#ip route add 10.0.2.0/24 dev eth0
 echo "10.0.2.2 host" > /etc/hosts
 
 # Command disection:
-# * `exec` to keep this process on PID 1
 # * `setsid` to run in a new session
 # * `cttyhack` to allocate a controlling tty
 # * `sh` to start an interactive shell
-exec setsid cttyhack sh
+setsid cttyhack sh
 
 # Reboot
 echo b > /proc/sysrq-trigger

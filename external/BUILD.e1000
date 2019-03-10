@@ -1,5 +1,0 @@
-alias(
-    name = "kernel_module",
-    actual = ":e1000.ko.xz",
-    visibility = ["//visibility:public"],
-)

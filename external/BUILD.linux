@@ -1,5 +1,0 @@
-alias(
-    name = "kernel",
-    actual = ":vmlinuz-linux",
-    visibility = ["//visibility:public"],
-)

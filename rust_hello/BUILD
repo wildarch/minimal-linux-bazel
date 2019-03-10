@@ -14,7 +14,6 @@ genrule(
 		    --target-dir target/ \
 		&& cp target/x86_64-unknown-linux-musl/release/rust_hello $@",
     executable = True,
-    local = True,
     output_to_bindir = True,
     visibility = ["//visibility:public"],
 )

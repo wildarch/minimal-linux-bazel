@@ -2,22 +2,16 @@ workspace(name = "minimal_linux_bazel")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
-http_archive(
-    name = "linux",
-    build_file = "BUILD.linux",
-    sha256 = "f0dada7d67f9e402d77852bca9a002aad0e7e1837279db92d897d8d4680b258d",
-    strip_prefix = "boot/",
-    url = "https://archive.archlinux.org/packages/l/linux/linux-4.20.11.arch1-1-x86_64.pkg.tar.xz",
-    # TODO mirrors
-)
+# Kernel and drivers
+load("//:kernel.bzl", "kernel_driver", "kernel_repository")
 
-http_archive(
-    name = "e1000",
-    build_file = "BUILD.e1000",
-    sha256 = "f0dada7d67f9e402d77852bca9a002aad0e7e1837279db92d897d8d4680b258d",
-    strip_prefix = "usr/lib/modules/4.20.11-arch1-1-ARCH/kernel/drivers/net/ethernet/intel/e1000/",
-    url = "https://archive.archlinux.org/packages/l/linux/linux-4.20.11.arch1-1-x86_64.pkg.tar.xz",
-)
+KERNEL_SHA256 = "09b6cbd5d0db19d79980911eb3f6cf1acb66dbbe1d92c1361eb78a29acca310a"
+
+KERNEL_NAME = "4.20.13.arch1-1-x86_64"
+
+kernel_repository(KERNEL_NAME, KERNEL_SHA256)
+
+kernel_driver("e1000", "net/ethernet/intel/e1000", KERNEL_NAME, KERNEL_SHA256)
 
 http_file(
     name = "busybox",

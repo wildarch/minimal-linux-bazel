@@ -3,7 +3,7 @@ genrule(
     srcs = [
         "@busybox//file",
         ":init",
-        "@e1000//:kernel_module",
+        "@e1000",
         "//rust_hello",
     ],
     outs = ["rootfs.gz"],

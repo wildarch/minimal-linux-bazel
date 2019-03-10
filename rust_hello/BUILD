@@ -1,3 +1,5 @@
+# Because rules_rust does not have musl support (or good cargo dependency management),
+# we are stuck with a genrule for now.
 genrule(
     name = "rust_hello_cargo",
     srcs = glob(["src/**/*.rs"]) + [

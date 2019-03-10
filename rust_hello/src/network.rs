@@ -1,7 +1,6 @@
+use failure::Fail;
 use libc::{c_char, c_short, IFF_UP, IFNAMSIZ, SIOCSIFADDR, SIOCSIFFLAGS, SIOCSIFNETMASK};
 use nix::sys::socket::{self, sockaddr, AddressFamily, InetAddr, SockAddr, SockFlag, SockType};
-// Macros for ioctl
-use failure::Fail;
 use nix::{convert_ioctl_res, ioctl_write_ptr_bad};
 use std::fs::File;
 use std::net::{IpAddr, SocketAddr};

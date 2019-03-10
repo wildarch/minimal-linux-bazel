@@ -7,3 +7,4 @@ You need the following dependencies:
 * Rust toolchain with cargo and the x86_64-unknown-linux-musl target
 * python3 interpreter
 * C compiler for x86_64 linux musl 
+* the `xz` command must be in your path

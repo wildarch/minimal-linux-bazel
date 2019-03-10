@@ -7,7 +7,7 @@ mount -t sysfs none /sys
 
 # Load the e1000 ethernet driver
 # FIXME this is very hacky
-insmod /e1000.ko.xz
+#insmod /e1000.ko.xz
 
 # Setup networking
 #ip link set eth0 up

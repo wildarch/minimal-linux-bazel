@@ -15,10 +15,12 @@ alias(
 """
 
 KERNEL_DRIVER_BUILD_FILE = """
-alias(
+genrule(
     name = "{0}",
-    actual = ":{0}.ko.xz",
+    srcs = ["{0}.ko.xz"],
+    outs = ["{0}.ko"],
     visibility = ["//visibility:public"],
+    cmd = "cp $(location {0}.ko.xz) {0}.ko.xz && xz --decompress {0}.ko.xz && cp {0}.ko $@",
 )
 """
 

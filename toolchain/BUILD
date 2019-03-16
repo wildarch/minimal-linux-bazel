@@ -7,15 +7,11 @@ constraint_value(
     constraint_setting = ":libc",
 )
 
-constraint_value(
-    name = "gnu",
-    constraint_setting = ":libc",
-)
-
 platform(
-    name = "linux-musl",
+    name = "x86_64-unknown-linux-musl",
     constraint_values = [
         "@bazel_tools//platforms:x86_64",
+        "@bazel_tools//platforms:linux",
         ":musl",
     ],
 )
@@ -39,9 +35,11 @@ toolchain(
     name = "rust-x86_64-unknown-linux-musl",
     exec_compatible_with = [
         "@bazel_tools//platforms:x86_64",
+        "@bazel_tools//platforms:linux",
     ],
     target_compatible_with = [
         "@bazel_tools//platforms:x86_64",
+        "@bazel_tools//platforms:linux",
         ":musl",
     ],
     toolchain = "rust-x86_64-unknown-linux-musl_impl",

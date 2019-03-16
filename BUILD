@@ -1,3 +1,10 @@
+load("@io_bazel_rules_rust//rust:rust.bzl", "rust_binary")
+
+rust_binary(
+    name = "test_musl_bin",
+    srcs = ["test_musl_bin.rs"],
+)
+
 genrule(
     name = "rootfs",
     srcs = [

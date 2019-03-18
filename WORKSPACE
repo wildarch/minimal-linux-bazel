@@ -5,9 +5,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file"
 # Kernel and drivers
 load("//:kernel.bzl", "kernel_driver", "kernel_repository")
 
-KERNEL_SHA256 = "09b6cbd5d0db19d79980911eb3f6cf1acb66dbbe1d92c1361eb78a29acca310a"
+KERNEL_SHA256 = "5b22a60437f2604166679c29a08b51b4a6696829378a60ab745ae9f5a0b2d932"
 
-KERNEL_NAME = "4.20.13.arch1-1-x86_64"
+KERNEL_NAME = "5.0.2.arch1-1-x86_64"
 
 kernel_repository(KERNEL_NAME, KERNEL_SHA256)
 

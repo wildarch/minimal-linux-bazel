@@ -37,7 +37,7 @@ def kernel_url_to_path(url):
         # Fine as is
         return url
 
-def kernel_repository(name, sha256):
+def kernel_repository(name, sha256 = None):
     http_archive(
         name = "linux",
         build_file_content = KERNEL_BUILD_FILE,

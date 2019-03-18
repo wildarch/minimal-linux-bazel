@@ -48,9 +48,14 @@ http_archive(
     url = "https://github.com/bazelbuild/bazel-skylib/archive/0.6.0.tar.gz",
 )
 
-load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
+load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repository_set")
 
-rust_repositories()
+rust_repository_set(
+    name = "rust_linux_x86_64",
+    exec_triple = "x86_64-unknown-linux-gnu",
+    extra_target_triples = [],
+    version = "1.33.0",
+)
 
 load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
 

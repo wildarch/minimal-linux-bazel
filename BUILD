@@ -32,7 +32,7 @@ genrule(
 			$(locations @syslinux//:isolinux) \
 			$(location @linux//:kernel) \
 			$(location :rootfs) && \
-		    $(location //mkiso) \
+            $(location //mkiso) \
 			-o $@ \
 			-b isolinux.bin \
 			-c boot.cat \

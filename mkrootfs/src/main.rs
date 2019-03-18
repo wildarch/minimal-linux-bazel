@@ -12,9 +12,6 @@
 /// ```bash
 /// mkrootfs dev sys proc bin/busybox init rootfs.gz
 /// ```
-extern crate cpio;
-extern crate libflate;
-
 use cpio::NewcBuilder;
 use libflate::gzip;
 use std::env::args;
@@ -33,7 +30,7 @@ enum Error {
 
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        use Error::*;
+        use crate::Error::*;
         match self {
             OpenFile { path, e } => write!(f, "Could not open file {}: {}", path.display(), e),
             CreateFile { path, e } => write!(f, "Could not create file {}: {}", path.display(), e),

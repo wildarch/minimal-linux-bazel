@@ -2,9 +2,19 @@
 This is all very experimental and documentation is basically non-existent. Hopefully that will change one day...
 
 # Building
+Only linux systems are supported as hosts for now.
+
 You need the following dependencies:
 * Bazel
-* Rust toolchain with cargo and the x86_64-unknown-linux-musl target
 * python3 interpreter
-* C compiler for x86_64 linux musl 
-* the `xz` command must be in your path
+* (optional) qemu to run the generated disk image.
+
+To build:
+```bash
+bazel build --config=musl //:iso
+```
+
+To run in qemu:
+```bash
+./qemu_run.sh
+```

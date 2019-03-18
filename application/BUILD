@@ -3,6 +3,7 @@ load("@io_bazel_rules_rust//rust:rust.bzl", "rust_binary")
 rust_binary(
     name = "application",
     srcs = [
+        "src/driver.rs",
         "src/main.rs",
         "src/network.rs",
     ],

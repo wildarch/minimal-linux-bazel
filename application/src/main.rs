@@ -1,13 +1,11 @@
+mod driver;
 mod network;
 
 use hyper::rt::{self, Future};
 use hyper::service::service_fn_ok;
 use hyper::{Body, Request, Response, Server};
-use libc::{syscall, SYS_finit_module};
 use std::fs::File;
-use std::io;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-use std::os::unix::io::AsRawFd;
 use sys_mount::{Mount, MountFlags};
 
 fn main() {
@@ -18,17 +16,8 @@ fn main() {
     Mount::new("none", "/sys", "sysfs", MountFlags::empty(), None).expect("Failed to mount /sys");
 
     // Load ethernet driver
-    let driver = File::open("/e1000.ko").expect("Could not open driver");
-    let fd = driver.as_raw_fd();
-    let res = unsafe { syscall(SYS_finit_module, fd, &[0u8; 1], 0) };
-    if res < 0 {
-        println!(
-            "Failed to load kernel module: {}",
-            io::Error::last_os_error()
-        );
-    } else {
-        println!("Loaded kernel module");
-    }
+    let driver_file = File::open("/e1000.ko").expect("Could not open driver");
+    driver::load(driver_file).expect("Failed to load ethernet driver");
 
     // Setup the network
     let ip: IpAddr = Ipv4Addr::new(10, 0, 2, 15).into();

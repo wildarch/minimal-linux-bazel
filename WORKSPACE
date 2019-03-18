@@ -23,7 +23,16 @@ http_file(
 
 http_archive(
     name = "syslinux",
-    build_file = "BUILD.syslinux",
+    build_file_content = """ 
+filegroup(
+	name = "isolinux",
+	srcs = [
+		":bios/core/isolinux.bin",
+		":bios/com32/elflink/ldlinux/ldlinux.c32",
+	],
+        visibility = ["//visibility:public"],
+)
+    """,
     sha256 = "26d3986d2bea109d5dc0e4f8c4822a459276cf021125e8c9f23c3cca5d8c850e",
     strip_prefix = "syslinux-6.03",
     url = "http://kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.xz",
@@ -55,53 +64,13 @@ load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
 
 bazel_version(name = "bazel_version")
 
-http_archive(
-    name = "cpio",
-    build_file = "BUILD.cpio",
-    sha256 = "f3750c713eca14655a2778c369edc4c1edf2386b5f3a5ca8f6745f9e08b2698d",
-    strip_prefix = "cpio-rs-0.2.0",
-    url = "https://github.com/jcreekmore/cpio-rs/archive/0.2.0.tar.gz",
-)
+load("//application/raze:crates.bzl", fetch_application_crates = "raze_fetch_remote_crates")
 
-http_archive(
-    name = "libflate",
-    build_file = "BUILD.libflate",
-    sha256 = "b8957fd1a52633f7734767faf32d644305dacaa29f150ff4f7ced35d0bfc71fa",
-    strip_prefix = "libflate-0.1.20",
-    url = "https://github.com/sile/libflate/archive/0.1.20.tar.gz",
-)
+fetch_application_crates()
 
-http_archive(
-    name = "adler32",
-    build_file = "BUILD.adler32",
-    sha256 = "c7561840ce89f3b40fe9eaf50fccc7349342157dfd48ff933b61742b44fae187",
-    strip_prefix = "adler32-rs-1.0.3",
-    url = "https://github.com/remram44/adler32-rs/archive/1.0.3.tar.gz",
-)
+load("//mkrootfs/raze:crates.bzl", fetch_mkrootfs_crates = "raze_fetch_remote_crates")
 
-http_archive(
-    name = "crc32fast",
-    build_file = "BUILD.crc32fast",
-    sha256 = "83508ba9326ebff94247096e445c412fe414220212b4857c71ad4f4605445fe7",
-    strip_prefix = "rust-crc32fast-1.1.2",
-    url = "https://github.com/srijs/rust-crc32fast/archive/v1.1.2.tar.gz",
-)
-
-http_archive(
-    name = "cfg_if",
-    build_file = "BUILD.cfg_if",
-    sha256 = "0725ca36f2f3ae0180b24a34959aaed0e5422fe1f5ff505fdfb53ffee454db8a",
-    strip_prefix = "cfg-if-0.1.6",
-    url = "https://github.com/alexcrichton/cfg-if/archive/0.1.6.tar.gz",
-)
-
-http_archive(
-    name = "byteorder",
-    build_file = "BUILD.byteorder",
-    sha256 = "f3bcf82fe684090e57291f20cc021914f275f49f1df14f80457022a6131b16cd",
-    strip_prefix = "byteorder-1.3.1",
-    url = "https://github.com/BurntSushi/byteorder/archive/1.3.1.tar.gz",
-)
+fetch_mkrootfs_crates()
 
 # Rules python
 http_archive(
@@ -111,7 +80,13 @@ http_archive(
 
 http_archive(
     name = "pycdlib",
-    build_file = "BUILD.pycdlib",
+    build_file_content = """ 
+py_library(
+	name = "pycdlib",
+	srcs = glob(["*.py"]),
+	visibility = ["//visibility:public"],
+)
+    """,
     sha256 = "8a1669c8e932412b4572f5331d31f8ec2e70b63478eee50bae6448ec096acf6b",
     strip_prefix = "pycdlib-1.7.0/pycdlib/",
     url = "https://github.com/clalancette/pycdlib/archive/v1.7.0.tar.gz",

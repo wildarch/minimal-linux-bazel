@@ -5,7 +5,7 @@ rust_binary(
     srcs = ["src/main.rs"],
     visibility = ["//visibility:public"],
     deps = [
-        "@cpio",
-        "@libflate",
+        "//mkrootfs/raze:cpio",
+        "//mkrootfs/raze:libflate",
     ],
 )

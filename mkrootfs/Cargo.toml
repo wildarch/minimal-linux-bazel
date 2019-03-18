@@ -1,0 +1,9 @@
+[package]
+name = "mkrootfs"
+version = "0.1.0"
+authors = ["Daan de Graaf <daandegraaf9@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+libflate = "0.1"
+cpio = "0.2"

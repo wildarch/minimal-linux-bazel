@@ -1,5 +1,0 @@
-py_library(
-	name = "pycdlib",
-	srcs = glob(["*.py"]),
-	visibility = ["//visibility:public"],
-)

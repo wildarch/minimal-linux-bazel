@@ -1,8 +1,0 @@
-filegroup(
-	name = "isolinux",
-	srcs = [
-		":bios/core/isolinux.bin",
-		":bios/com32/elflink/ldlinux/ldlinux.c32",
-	],
-        visibility = ["//visibility:public"],
-)

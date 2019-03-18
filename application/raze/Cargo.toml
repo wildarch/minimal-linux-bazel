@@ -1,0 +1,19 @@
+# This Cargo.toml is used by cargo-raze to generate BUILD files for dependencies.
+[package]
+name = "minimal_linux_bazel_application"
+version = "0.1.0"
+authors = ["Daan de Graaf <daandegraaf9@gmail.com>"]
+edition = "2018"
+
+[lib]
+path = "fake_lib.rs" 
+
+[dependencies]
+nix = "0.13"
+libc = "0.2"
+hyper = "0.12"
+
+[raze]
+workspace_path = "//application/raze"
+target = "x86_64-unknown-linux-musl"
+genmode = "Remote"

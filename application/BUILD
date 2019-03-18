@@ -12,5 +12,6 @@ rust_binary(
         "//application/raze:hyper",
         "//application/raze:libc",
         "//application/raze:nix",
+        "//application/raze:sys_mount",
     ],
 )

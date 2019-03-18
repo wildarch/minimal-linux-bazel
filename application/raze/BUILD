@@ -20,3 +20,7 @@ alias(
     name = "nix",
     actual = "@raze__nix__0_13_0//:nix",
 )
+alias(
+    name = "sys_mount",
+    actual = "@raze__sys_mount__1_2_0//:sys_mount",
+)

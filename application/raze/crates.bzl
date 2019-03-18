@@ -125,6 +125,24 @@ def raze_fetch_remote_crates():
     )
 
     _new_http_archive(
+        name = "raze__errno__0_2_4",
+        url = "https://crates-io.s3-us-west-1.amazonaws.com/crates/errno/errno-0.2.4.crate",
+        type = "tar.gz",
+        sha256 = "c2a071601ed01b988f896ab14b95e67335d1eeb50190932a1320f7fe3cadc84e",
+        strip_prefix = "errno-0.2.4",
+        build_file = Label("//application/raze/remote:errno-0.2.4.BUILD")
+    )
+
+    _new_http_archive(
+        name = "raze__errno_dragonfly__0_1_1",
+        url = "https://crates-io.s3-us-west-1.amazonaws.com/crates/errno-dragonfly/errno-dragonfly-0.1.1.crate",
+        type = "tar.gz",
+        sha256 = "14ca354e36190500e1e1fb267c647932382b54053c50b14970856c0b00a35067",
+        strip_prefix = "errno-dragonfly-0.1.1",
+        build_file = Label("//application/raze/remote:errno-dragonfly-0.1.1.BUILD")
+    )
+
+    _new_http_archive(
         name = "raze__fnv__1_0_6",
         url = "https://crates-io.s3-us-west-1.amazonaws.com/crates/fnv/fnv-1.0.6.crate",
         type = "tar.gz",
@@ -176,6 +194,15 @@ def raze_fetch_remote_crates():
         sha256 = "ab90cde24b3319636588d0c35fe03b1333857621051837ed769faefb4c2162e4",
         strip_prefix = "futures-cpupool-0.1.8",
         build_file = Label("//application/raze/remote:futures-cpupool-0.1.8.BUILD")
+    )
+
+    _new_http_archive(
+        name = "raze__gcc__0_3_55",
+        url = "https://crates-io.s3-us-west-1.amazonaws.com/crates/gcc/gcc-0.3.55.crate",
+        type = "tar.gz",
+        sha256 = "8f5f3913fa0bfe7ee1fd8248b6b9f42a5af4b9d65ec2dd2c3c26132b950ecfc2",
+        strip_prefix = "gcc-0.3.55",
+        build_file = Label("//application/raze/remote:gcc-0.3.55.BUILD")
     )
 
     _new_http_archive(
@@ -293,6 +320,15 @@ def raze_fetch_remote_crates():
         sha256 = "c84ec4b527950aa83a329754b01dbe3f58361d1c5efacd1f6d68c494d08a17c6",
         strip_prefix = "log-0.4.6",
         build_file = Label("//application/raze/remote:log-0.4.6.BUILD")
+    )
+
+    _new_http_archive(
+        name = "raze__loopdev__0_2_1",
+        url = "https://crates-io.s3-us-west-1.amazonaws.com/crates/loopdev/loopdev-0.2.1.crate",
+        type = "tar.gz",
+        sha256 = "ac9e35cfb6646d67059f2ca8913a90e6c60633053c103df423975297f33d6fcc",
+        strip_prefix = "loopdev-0.2.1",
+        build_file = Label("//application/raze/remote:loopdev-0.2.1.BUILD")
     )
 
     _new_http_archive(
@@ -563,6 +599,15 @@ def raze_fetch_remote_crates():
         sha256 = "b639411d0b9c738748b5397d5ceba08e648f4f1992231aa859af1a017f31f60b",
         strip_prefix = "string-0.1.3",
         build_file = Label("//application/raze/remote:string-0.1.3.BUILD")
+    )
+
+    _new_http_archive(
+        name = "raze__sys_mount__1_2_0",
+        url = "https://crates-io.s3-us-west-1.amazonaws.com/crates/sys-mount/sys-mount-1.2.0.crate",
+        type = "tar.gz",
+        sha256 = "574db4a99f40b407e9a3f7c5bcc96ad160ef07c5b8daab9cbb22315d86760280",
+        strip_prefix = "sys-mount-1.2.0",
+        build_file = Label("//application/raze/remote:sys-mount-1.2.0.BUILD")
     )
 
     _new_http_archive(

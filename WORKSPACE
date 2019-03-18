@@ -13,14 +13,6 @@ kernel_repository(KERNEL_NAME, KERNEL_SHA256)
 
 kernel_driver("e1000", "net/ethernet/intel/e1000", KERNEL_NAME, KERNEL_SHA256)
 
-http_file(
-    name = "busybox",
-    downloaded_file_path = "busybox",
-    executable = True,
-    sha256 = "584e36c5ad6147863c6423fbd8180df0a77e3bdbd1f1b15a7fb393d1e17bee9e",
-    urls = ["https://busybox.net/downloads/binaries/1.28.1-defconfig-multiarch/busybox-x86_64"],
-)
-
 http_archive(
     name = "syslinux",
     build_file_content = """ 

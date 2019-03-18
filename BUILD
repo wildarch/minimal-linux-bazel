@@ -1,30 +1,18 @@
 genrule(
     name = "rootfs",
     srcs = [
-        "@busybox//file",
-        ":init",
         "@e1000//:e1000.ko",
         "//application",
     ],
     outs = ["rootfs.gz"],
     cmd = "mkdir rootfs/ && \
-	(echo $(SRCS) | xargs cp -t rootfs/) && \
-	chmod +x rootfs/init && \
-	chmod +x rootfs/busybox && \
+    cp $(location @e1000//:e1000.ko) rootfs/e1000.ko && \
+    cp $(location //application) rootfs/init && \
 	mkdir rootfs/dev && \
 	mkdir rootfs/proc && \
 	mkdir rootfs/sys && \
-	mkdir rootfs/etc && \
-	mkdir rootfs/bin && \
-	mkdir rootfs/sbin && \
-	mkdir rootfs/usr && \
-	mkdir rootfs/usr/bin && \
-	mkdir rootfs/usr/sbin && \
-	mv rootfs/busybox rootfs/bin/ && \
-	for util in $$(cat $(location :busybox_utils)); do ln -s /bin/busybox rootfs/$$util; done && \
 	cd rootfs/ && ../$(location //mkrootfs) $$(find . ) ../$@",
     tools = [
-        ":busybox_utils",
         "//mkrootfs",
     ],
 )
@@ -40,7 +28,7 @@ genrule(
     outs = ["dist.iso"],
     cmd = "mkdir root/ && \
 		    cp -t root/ \
-		    	$(location //:isolinux.cfg) \
+		    $(location //:isolinux.cfg) \
 			$(locations @syslinux//:isolinux) \
 			$(location @linux//:kernel) \
 			$(location :rootfs) && \

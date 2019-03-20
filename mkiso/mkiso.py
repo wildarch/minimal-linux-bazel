@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(description='Create a bootable iso image')
 parser.add_argument('-o', dest='output')
 parser.add_argument('-b', dest='boot')
 parser.add_argument('-c', dest='boot_cat')
-parser.add_argument('dir')
+parser.add_argument('files', nargs='+')
 args = parser.parse_args()
 
 iso = pycdlib.PyCdlib()
@@ -29,8 +29,8 @@ def iso_filename(filename):
     filename = ''.join([ c for c in filename.upper() if c in ISO9660_CHARS ])
     return '/{};1'.format(filename)
 
-for filename in os.listdir(args.dir):
-    path = os.path.join(args.dir, filename)
+for path in args.files:
+    filename = os.path.basename(path)
     iso.add_file(path, iso_filename(filename), rr_name=filename)
 
 iso.add_eltorito(

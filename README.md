@@ -6,12 +6,12 @@ Only linux systems are supported as hosts for now.
 
 You need the following dependencies:
 * Bazel
-* python3 interpreter
+* Python interpreter
 * (optional) qemu to run the generated disk image.
 
-To build:
+To build a bootable iso image (for x86-64 qemu):
 ```bash
-bazel build --config=musl //:iso
+bazel build --config=musl //application:iso
 ```
 
 To run in qemu:

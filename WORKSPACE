@@ -69,12 +69,6 @@ load("//mkrootfs/raze:crates.bzl", fetch_mkrootfs_crates = "raze_fetch_remote_cr
 
 fetch_mkrootfs_crates()
 
-# Rules python
-http_archive(
-    name = "io_bazel_rules_python",
-    url = "https://github.com/bazelbuild/rules_python/archive/88532b624f74ab17138fb638d3c62750b5af5f9a.zip",
-)
-
 http_archive(
     name = "pycdlib",
     build_file_content = """ 

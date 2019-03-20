@@ -16,11 +16,19 @@ def _rust_rootfs_impl(ctx):
         progress_message = "Building rootfs",
     )
 
+load("@io_bazel_rules_rust//rust:private/rustc.bzl", "CrateInfo")
+
 rust_rootfs = rule(
     attrs = {
         "init": attr.label(
             mandatory = True,
-            providers = [DefaultInfo],
+            providers = [
+                DefaultInfo,
+                # To make sure this is actually a valid rust target
+                CrateInfo,
+            ],
+            executable = True,
+            cfg = "target",
         ),
         "out": attr.output(mandatory = True),
         "_mkrootfs": attr.label(

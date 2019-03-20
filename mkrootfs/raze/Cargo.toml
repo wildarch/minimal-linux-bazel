@@ -10,8 +10,15 @@ path = "fake_lib.rs"
 [dependencies]
 libflate = "0.1"
 cpio = "0.2"
+failure = "0.1"
+structopt = "0.2"
 
 [raze]
 workspace_path = "//mkrootfs/raze"
 target = "x86_64-unknown-linux-gnu"
 genmode = "Remote"
+
+[raze.crates.proc-macro2.'0.4.27']
+additional_flags = [
+    "--cfg=use_proc_macro",
+]

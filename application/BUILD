@@ -7,6 +7,7 @@ rust_binary(
         "src/main.rs",
         "src/network.rs",
     ],
+    data = ["@e1000"],
     edition = "2018",
     visibility = ["//visibility:public"],
     deps = [

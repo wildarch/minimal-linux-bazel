@@ -1,20 +1,10 @@
-genrule(
+load("@io_bazel_rules_rust//rust:rust.bzl", "rust_binary")
+load(":rootfs.bzl", "rust_rootfs")
+
+rust_rootfs(
     name = "rootfs",
-    srcs = [
-        "@e1000//:e1000.ko",
-        "//application",
-    ],
-    outs = ["rootfs.gz"],
-    cmd = "mkdir rootfs/ && \
-    cp $(location @e1000//:e1000.ko) rootfs/e1000.ko && \
-    cp $(location //application) rootfs/init && \
-	mkdir rootfs/dev && \
-	mkdir rootfs/proc && \
-	mkdir rootfs/sys && \
-	cd rootfs/ && ../$(location //mkrootfs) $$(find . ) ../$@",
-    tools = [
-        "//mkrootfs",
-    ],
+    out = "rootfs.gz",
+    init = "//application",
 )
 
 genrule(

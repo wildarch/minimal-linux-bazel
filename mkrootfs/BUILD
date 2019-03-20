@@ -7,6 +7,8 @@ rust_binary(
     visibility = ["//visibility:public"],
     deps = [
         "//mkrootfs/raze:cpio",
+        "//mkrootfs/raze:failure",
         "//mkrootfs/raze:libflate",
+        "//mkrootfs/raze:structopt",
     ],
 )

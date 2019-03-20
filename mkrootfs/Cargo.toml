@@ -7,3 +7,5 @@ edition = "2018"
 [dependencies]
 libflate = "0.1"
 cpio = "0.2"
+failure = "0.1"
+structopt = "0.2"

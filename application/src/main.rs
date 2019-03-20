@@ -4,11 +4,15 @@ mod network;
 use hyper::rt::{self, Future};
 use hyper::service::service_fn_ok;
 use hyper::{Body, Request, Response, Server};
-use std::fs::File;
+use std::fs::{self, File};
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use sys_mount::{Mount, MountFlags};
 
 fn main() {
+    // Create mount points
+    for dir in &["/proc", "/sys"] {
+        fs::create_dir(dir).expect(&format!("Failed to create mountpoint: {}", dir));
+    }
     // Configure file systems
     Mount::new("none", "/dev", "devtmpfs", MountFlags::empty(), None)
         .expect("Failed to mount /dev");

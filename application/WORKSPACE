@@ -1,0 +1,11 @@
+local_repository(
+    name = "minimal_linux_bazel",
+    path = "../",
+)
+
+load("@minimal_linux_bazel//:fetch.bzl", "fetch_dependencies")
+load("//:raze/crates.bzl", "raze_fetch_remote_crates")
+
+raze_fetch_remote_crates()
+
+fetch_dependencies()

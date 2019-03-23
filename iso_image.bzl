@@ -32,7 +32,7 @@ iso_image = rule(
             executable = True,
             cfg = "host",
             allow_files = True,
-            default = Label("//mkiso"),
+            default = Label("@minimal_linux_bazel//mkiso"),
         ),
         "isolinux": attr.label(
             default = Label("@syslinux//:isolinux"),

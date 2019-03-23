@@ -35,7 +35,7 @@ rust_rootfs = rule(
             executable = True,
             cfg = "host",
             allow_files = True,
-            default = Label("//mkrootfs"),
+            default = Label("@minimal_linux_bazel//mkrootfs"),
         ),
     },
     toolchains = ["@io_bazel_rules_rust//rust:toolchain"],

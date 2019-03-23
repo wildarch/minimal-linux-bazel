@@ -1,4 +1,4 @@
-bazel build --config=musl //:iso && \
+bazel build --config=x86_64 //:iso && \
 qemu-system-x86_64 \
     -m 128M \
     -cdrom bazel-bin/dist.iso \

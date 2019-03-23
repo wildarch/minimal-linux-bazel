@@ -6,7 +6,7 @@ DO NOT EDIT! Replaced on runs of cargo-raze
 package(default_visibility = [
   # Public for visibility by "@raze__crate__version//" targets.
   #
-  # Prefer access through "//application/raze", which limits external
+  # Prefer access through "//raze", which limits external
   # visibility to explicit Cargo.toml dependencies.
   "//visibility:public",
 ])
@@ -49,7 +49,7 @@ rust_binary(
     edition = "2015",
     srcs = glob(["**/*.rs"]),
     deps = [
-        # Binaries get an implicit dependency on their crate's lib
+        # Binaries get an implicit dependency on their lib
         ":cc",
     ],
     rustc_flags = [

@@ -1,7 +1,7 @@
-bazel build --config=musl //application:iso && \
+bazel build --config=musl //:iso && \
 qemu-system-x86_64 \
     -m 128M \
-    -cdrom bazel-bin/application/dist.iso \
+    -cdrom bazel-bin/dist.iso \
     -boot d \
     -nographic \
     -netdev user,id=n1,hostfwd=tcp::3000-:3000 \

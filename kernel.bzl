@@ -24,7 +24,7 @@ genrule(
 )
 """
 
-def kernel_url_to_path(url):
+def _kernel_url_to_path(url):
     parts = url.split(".")
     if len(parts) <= 2 or len(parts) > 4:
         fail("Invalid kernel name")
@@ -51,6 +51,6 @@ def kernel_driver(driver_name, path, kernel_name, kernel_sha256):
         name = driver_name,
         build_file_content = KERNEL_DRIVER_BUILD_FILE.format(driver_name),
         sha256 = kernel_sha256,
-        strip_prefix = "usr/lib/modules/" + kernel_url_to_path(kernel_name) + "/kernel/drivers/" + path,
+        strip_prefix = "usr/lib/modules/" + _kernel_url_to_path(kernel_name) + "/kernel/drivers/" + path,
         url = KERNEL_URL.format(kernel_name),
     )

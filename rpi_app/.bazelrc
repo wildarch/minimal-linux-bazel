@@ -1,0 +1,4 @@
+build:rpi2 --platforms @minimal_linux_bazel//toolchain:armv7-unknown-linux-musleabihf 
+build:rpi2 --crosstool_top=@minimal_linux_bazel//toolchain:gcc-armv7l-linux-musleabihf 
+build:rpi2 --cpu armv7l
+build:rpi2 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain

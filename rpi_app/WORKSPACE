@@ -31,19 +31,3 @@ local_repository(
 load("@minimal_linux_bazel//:fetch.bzl", "fetch_dependencies")
 
 fetch_dependencies()
-
-# Application dependencies
-load("//:raze/crates.bzl", "raze_fetch_remote_crates")
-
-raze_fetch_remote_crates()
-
-# Kernel and drivers
-load("@minimal_linux_bazel//:kernel.bzl", "kernel_driver", "kernel_repository")
-
-KERNEL_SHA256 = "5b22a60437f2604166679c29a08b51b4a6696829378a60ab745ae9f5a0b2d932"
-
-KERNEL_NAME = "5.0.2.arch1-1-x86_64"
-
-kernel_repository(KERNEL_NAME, KERNEL_SHA256)
-
-kernel_driver("e1000", "net/ethernet/intel/e1000", KERNEL_NAME, KERNEL_SHA256)

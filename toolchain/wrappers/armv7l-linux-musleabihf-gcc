@@ -1,0 +1,2 @@
+#!/bin/bash
+exec external/gcc-armv7l-linux-musleabihf/bin/armv7l-linux-musleabihf-gcc "$@"

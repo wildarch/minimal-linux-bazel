@@ -1,0 +1,54 @@
+major_version: "1"
+minor_version: "0"
+default_target_cpu: "armv7l"
+
+toolchain {
+   toolchain_identifier: "gcc-armv7l-linux-musleabihf-toolchain"
+   host_system_name: "x86_64-unknown-linux-gnu"
+   target_system_name: "armv7l-unknown-linux-musleabihf"
+   target_cpu: "armv7l"
+   target_libc: "musl"
+   compiler: "gcc"
+   abi_version: "eabihf"
+   abi_libc_version: "musleabihf" 
+
+    tool_path {
+        name: "gcc"
+        path: "wrappers/armv7l-linux-musleabihf-gcc"
+    }
+    tool_path {
+        name: "ld"
+        path: "/bin/false"
+    }
+    tool_path {
+        name: "ar"
+        path: "/bin/false"
+    }
+    tool_path {
+        name: "cpp"
+        path: "/bin/false"
+    }
+    tool_path {
+        name: "gcov"
+        path: "/bin/false"
+    }
+    tool_path {
+        name: "nm"
+        path: "/bin/false"
+    }
+    tool_path {
+        name: "objdump"
+        path: "/bin/false"
+    }
+    tool_path {
+        name: "strip"
+        path: "/bin/false"
+    }
+
+    compiler_flag: "-isystem"
+    compiler_flag: "external/gcc-armv7l-linux-musleabihf/armv7l-linux-musleabihf/include"
+
+    compiler_flag: "-isystem"
+    compiler_flag: "external/gcc-armv7l-linux-musleabihf/include"
+}
+

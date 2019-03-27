@@ -5,9 +5,10 @@ def _rust_rootfs_impl(ctx):
     if not toolchain.target_triple.endswith("linux-musl"):
         fail("Target '{}' is not supported, you must use a *-linux-musl target for init"
             .format(toolchain.target_triple))
-    files = ctx.attr.init[DefaultInfo].data_runfiles.files
-    init_path = ctx.attr.init[DefaultInfo].files_to_run.executable.path
+    executable = ctx.attr.init[DefaultInfo].files_to_run.executable
+    files = ctx.files.data + [executable]
     paths = [f.path for f in files]
+    init_path = executable.path
     ctx.actions.run(
         inputs = files,
         outputs = [ctx.outputs.out],
@@ -31,6 +32,10 @@ rust_rootfs = rule(
             cfg = "target",
         ),
         "out": attr.output(mandatory = True),
+        "data": attr.label_list(
+            allow_empty = True,
+            allow_files = True,
+        ),
         "_mkrootfs": attr.label(
             executable = True,
             cfg = "host",

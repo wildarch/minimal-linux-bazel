@@ -1,2 +1,4 @@
 #!/bin/bash
+PWD=$(pwd)
+echo "Working directory: '$PWD'"
 exec external/gcc-armv7l-linux-musleabihf/bin/armv7l-linux-musleabihf-gcc "$@"

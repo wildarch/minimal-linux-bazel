@@ -24,7 +24,7 @@ def fetch_toolchains():
         name = "gcc-armv7l-linux-musleabihf",
         build_file = "@minimal_linux_bazel//toolchain:gcc-armv7l-linux-musleabihf.BUILD",
         strip_prefix = "armv7l-linux-musleabihf-cross",
-        # Note there is not provided SHA256 because this archive changes with every rebuild.
+        # Note there is no fixed SHA256 because this archive changes frequently..
         # Not very hermetic, but there is no other good source for musl gcc toolchains.
         url = "http://musl.cc/armv7l-linux-musleabihf-cross.tgz",
     )

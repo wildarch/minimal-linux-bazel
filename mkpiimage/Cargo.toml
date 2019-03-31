@@ -1,0 +1,10 @@
+[package]
+name = "mkpiimage"
+version = "0.1.0"
+authors = ["Daan de Graaf <daandegraaf9@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+fatfs = "0.3"
+fscommon = "0.1"
+structopt = "0.2"

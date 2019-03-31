@@ -31,3 +31,23 @@ local_repository(
 load("@minimal_linux_bazel//:fetch.bzl", "fetch_dependencies")
 
 fetch_dependencies()
+
+http_archive(
+    name = "raspberrypi_firmware",
+    build_file_content = """ 
+filegroup(
+    name = "boot_files",
+    srcs = glob(["boot/*"], exclude = ["boot/overlays"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "overlays",
+    srcs = glob(["boot/overlays/**/*"]),
+    visibility = ["//visibility:public"],
+)
+    """,
+    sha256 = "6b6db5f15c400bc1224266fd44238dd9b2479fd09f8a55e36ccdac2120632f8f",
+    strip_prefix = "firmware-1.20190215",
+    url = "https://github.com/raspberrypi/firmware/archive/1.20190215.tar.gz",
+)

@@ -2,18 +2,7 @@ workspace(name = "minimal_linux_bazel")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# Kernel and drivers
-load("//:kernel.bzl", "kernel_driver", "kernel_repository")
-
-KERNEL_SHA256 = "5b22a60437f2604166679c29a08b51b4a6696829378a60ab745ae9f5a0b2d932"
-
-KERNEL_NAME = "5.0.2.arch1-1-x86_64"
-
-kernel_repository(KERNEL_NAME, KERNEL_SHA256)
-
-kernel_driver("e1000", "net/ethernet/intel/e1000", KERNEL_NAME, KERNEL_SHA256)
-
-# Rust stuff
+# Rules rust
 http_archive(
     name = "io_bazel_rules_rust",
     sha256 = "c82118824b2448b77146f1dae97b6eaa717babedad0822aca4879f3cbbf2b7b5",
@@ -34,15 +23,6 @@ http_archive(
 load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
 
 bazel_version(name = "bazel_version")
-
-load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repository_set")
-
-rust_repository_set(
-    name = "rust_linux_x86_64",
-    exec_triple = "x86_64-unknown-linux-gnu",
-    extra_target_triples = [],
-    version = "1.33.0",
-)
 
 load("//:fetch.bzl", "fetch_dependencies")
 

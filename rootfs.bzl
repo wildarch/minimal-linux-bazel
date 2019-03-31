@@ -2,7 +2,7 @@ def _rust_rootfs_impl(ctx):
     toolchain = ctx.toolchains["@io_bazel_rules_rust//rust:toolchain"]
 
     # Check that we were given a linux musl init binary.
-    if not toolchain.target_triple.endswith("linux-musl"):
+    if toolchain.target_triple.find("linux-musl") == -1:
         fail("Target '{}' is not supported, you must use a *-linux-musl target for init"
             .format(toolchain.target_triple))
     executable = ctx.attr.init[DefaultInfo].files_to_run.executable

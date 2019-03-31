@@ -28,3 +28,15 @@ rpi_image(
     overlays = ["@raspberrypi_firmware//:overlays"],
     rootfs = ":rootfs",
 )
+
+sh_binary(
+    name = "qemu_run",
+    srcs = [
+        "qemu_run.sh",
+    ],
+    data = [
+        ":rootfs",
+        "@raspberrypi_firmware//:kernel7",
+        "@raspberrypi_firmware//:rpi2-dtb",
+    ],
+)

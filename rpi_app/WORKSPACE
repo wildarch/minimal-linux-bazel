@@ -46,6 +46,15 @@ filegroup(
     srcs = glob(["boot/overlays/**/*"]),
     visibility = ["//visibility:public"],
 )
+
+genrule(
+    name = "rpi2-qemu-files",
+    srcs = ["boot/kernel7.img", "boot/bcm2709-rpi-2-b.dtb"],
+    visibility = ["//visibility:public"],
+    outs = ["kernel7.img", "rpi2.dtb"],
+    cmd = "cp $(location boot/kernel7.img) $(location kernel7.img) && \
+         cp $(location boot/bcm2709-rpi-2-b.dtb) $(location rpi2.dtb)",
+)
     """,
     sha256 = "6b6db5f15c400bc1224266fd44238dd9b2479fd09f8a55e36ccdac2120632f8f",
     strip_prefix = "firmware-1.20190215",

@@ -1,5 +1,6 @@
 load("@io_bazel_rules_rust//rust:rust.bzl", "rust_binary")
 load("@minimal_linux_bazel//:rootfs.bzl", "rust_rootfs")
+load("@minimal_linux_bazel//:raspberry_pi.bzl", "rpi_image")
 
 rust_binary(
     name = "application",
@@ -20,16 +21,10 @@ rust_rootfs(
     init = ":application",
 )
 
-genrule(
+rpi_image(
     name = "image",
-    srcs = [
-        "@raspberrypi_firmware//:boot_files",
-        "@raspberrypi_firmware//:overlays",
-        "//:rootfs",
-        "config.txt",
-    ],
-    outs = ["dist.img"],
-    cmd = "$(location @minimal_linux_bazel//mkpiimage) $(locations @raspberrypi_firmware//:boot_files) $(location :rootfs) $(location config.txt) --overlays $(locations @raspberrypi_firmware//:overlays) --output $@",
-    output_to_bindir = True,
-    tools = ["@minimal_linux_bazel//mkpiimage"],
+    out = "dist.img",
+    boot_files = ["@raspberrypi_firmware//:boot_files"],
+    overlays = ["@raspberrypi_firmware//:overlays"],
+    rootfs = ":rootfs",
 )

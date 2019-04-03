@@ -13,6 +13,9 @@ rust_binary(
     ],
     edition = "2018",
     visibility = ["//visibility:public"],
+    deps = [
+        "//raze:x11",
+    ],
 )
 
 rust_rootfs(

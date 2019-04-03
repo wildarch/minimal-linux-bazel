@@ -60,3 +60,64 @@ genrule(
     strip_prefix = "firmware-1.20190215",
     url = "https://github.com/raspberrypi/firmware/archive/1.20190215.tar.gz",
 )
+
+load("//raze:crates.bzl", "raze_fetch_remote_crates")
+
+raze_fetch_remote_crates()
+
+http_archive(
+    name = "libx11",
+    build_file_content = """ 
+cc_library(
+    name = "libx11",
+    srcs = ["usr/lib/libX11.a"],
+    visibility = ["//visibility:public"],
+    deps = ["@libxcb"],
+)
+    """,
+    sha256 = "01026d22ebeebfed108de12bbd6540a9ad6b96e939447c64ebe0d0e5c5716b9b",
+    type = "tar.gz",
+    url = "http://dl-cdn.alpinelinux.org/alpine/v3.9/main/armv7/libx11-dev-1.6.7-r0.apk",
+)
+
+http_archive(
+    name = "libxcb",
+    build_file_content = """ 
+cc_library(
+    name = "libxcb",
+    srcs = ["usr/lib/libxcb.a"],
+    visibility = ["//visibility:public"],
+    deps = ["@libxau", "@libxdmcp"],
+)
+    """,
+    sha256 = "52bd54c03ad6a13a66187c212d1812ec7d495810cd7613bfd04466b7e9097d9c",
+    type = "tar.gz",
+    url = "http://dl-cdn.alpinelinux.org/alpine/v3.9/main/armv7/libxcb-dev-1.13-r2.apk",
+)
+
+http_archive(
+    name = "libxau",
+    build_file_content = """ 
+cc_library(
+    name = "libxau",
+    srcs = ["usr/lib/libXau.a"],
+    visibility = ["//visibility:public"],
+)
+    """,
+    type = "tar.gz",
+    url = "http://dl-cdn.alpinelinux.org/alpine/v3.9/main/armv7/libxau-dev-1.0.8-r3.apk",
+)
+
+http_archive(
+    name = "libxdmcp",
+    build_file_content = """ 
+cc_library(
+    name = "libxdmcp",
+    srcs = ["usr/lib/libXdmcp.a"],
+    visibility = ["//visibility:public"],
+)
+    """,
+    sha256 = "aebedf4afda9a6a2f27b7a356fba5a8e96961860a63a25fde95fc8d01502eb89",
+    type = "tar.gz",
+    url = "http://dl-cdn.alpinelinux.org/alpine/v3.9/main/armv7/libxdmcp-dev-1.1.2-r5.apk",
+)

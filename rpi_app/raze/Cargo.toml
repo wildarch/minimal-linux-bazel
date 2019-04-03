@@ -1,0 +1,21 @@
+[package]
+name = "rpi_app"
+version = "0.1.0"
+authors = ["Daan de Graaf <daandegraaf9@gmail.com>"]
+edition = "2018"
+
+[lib]
+path = "fake_lib.rs"
+
+[dependencies]
+x11 = { version = "2.18", features = ["xlib"] }
+
+[raze]
+genmode = "Remote"
+workspace_path = "//raze"
+target = "armv7-unknown-linux-musleabihf"
+
+[raze.crates.x11.'2.18.1']
+additional_deps = [
+    "@libx11",
+]
